@@ -1,11 +1,11 @@
 name: CI - Analytics Service
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
-    runs-on: ubuntu-latest
+  docker-build:
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v6
       - name: List files
-        run: ls -l 
+        run: ls -l
       - name: Build Image
         run: make docker-build
