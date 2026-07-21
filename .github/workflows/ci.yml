@@ -11,8 +11,10 @@ jobs:
   eks_deploy:
     runs-on: self-hosted
     steps:
-      - name: actions/checkout@v6
+      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6
         with:
           repository: WMP-App/wmp-helm-v1
+          path: helm
       - name: Helm Deploy
         run: make eks-deploy
