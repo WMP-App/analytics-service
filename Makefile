@@ -7,4 +7,7 @@ docker-build:
 eks-deploy:
 	aws eks update-kubeconfig --name dev
 	helm upgrade -i analytics-service ./helm -f helm/values/analytics-service.yml --set image_tag=$(image_tag)
-##
+
+argocd-deploy:
+	argocd login a7213ecbc3cc54d73afa7025ac69d22d-402813493.us-east-1.elb.amazonaws.com --insecure --username admin --password cZENgz7gW1q13kcI
+	argocd app create analytics-service --sync-policy manual --repo https://github.com/WMP-App/wmp-helm-v1.git --path . --dest-server https://kubernetes.default.svc   --dest-namespace default --helm-set-string image_tag=$(image_tag) --values values/analytics-service.yml
